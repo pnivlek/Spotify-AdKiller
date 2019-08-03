@@ -12,16 +12,35 @@
 
 #include <fnmatch.h>
 
-#define WHITELIST_LENGTH   10
-#define BLACKLIST_LENGTH   3
+#define WHITELIST_LENGTH   20
+#define BLACKLIST_LENGTH   2
 
 const char *hostname_whitelist[WHITELIST_LENGTH] =
-    { "*.spotify.com", "*.cloudfront.net", "api.tunigo.com", "apic.musixmatch.com",
-      "mxmscripts.s3.amazonaws.com", "artistheader.scdn.co", "profile-images.scdn.co", "i.scdn.co", "u.scdn.co",
-      "graph.facebook.com" };
+    { "ap.spotify.com", // audio (access point)
+    "*.ap.spotify.com", // resolved access points
+    "apresolve.spotify.com", // access point resolving
+    "audio-sp-*.pscdn.co", // audio
+    "audio4-fa.scdn.co", // audio
+    "charts-images.scdn.co", // charts images
+    "dailymix-images.scdn.co", // daily mix images
+    "dealer.spotify.com", // discord rich presence
+    "i.scdn.co", // cover art
+    "lineup-images.scdn.co", // playlists lineup images
+    "merch-img.scdn.co", // merch images
+    "mosaic.scdn.co", // playlist mosaic images
+    "o.scdn.co", // cover art
+    "pl.scdn.co", // playlist images
+    "profile-images.scdn.co", // artist profile images
+    "seeded-session-images.scdn.co", // radio images
+    "spclient.wg.spotify.com", // ads/tracking (blocked in blacklist), radio, recently played, friend activity,...
+    "t.scdn.co", // background images
+    "thisis-images.scdn.co", // 'this is' playlists images
+    "video-fa.scdn.co", // videos
+    };
     
 const char *hostname_blacklist[BLACKLIST_LENGTH] =
-    { "adeventtracker.spotify.com", "audio-sp-ash.spotify.com", "spclient.wg.spotify.com" };
+    { "https://spclient.wg.spotify.com/ads/*",
+    "https://spclient.wg.spotify.com/ad-logic/*", };
  
 int getaddrinfo(const char *hostname, const char *service,
                 const struct addrinfo *hints, struct addrinfo **res)
